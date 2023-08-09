@@ -36,7 +36,6 @@ end of comment"""
 
 
 
-def top3():
-    pass
 
-add_pushups()
+
+

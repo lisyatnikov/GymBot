@@ -2,17 +2,20 @@ import sqlite3
 from datetime import date, datetime
 
 
-con = sqlite3.connect("sport_dairy.db")
-cursor = con.cursor()
 
-
-def add_pushups():
+def set_connection_database():
+    con = sqlite3.connect("sport_dairy.db")
+    cursor = con.cursor()
     cursor.execute("""CREATE TABLE IF NOT EXISTS pushups
-                    (id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    date TEXT,
-                    time TEXT,
-                    count INTEGER)
-                    """)
+                            (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                            date TEXT,
+                            time TEXT,
+                            count INTEGER)
+                            """)
+    return con, cursor
+
+def add_pushups(quantity):
+    con, cursor = set_connection_database()
 
     dtnow = datetime.now()
     print(dtnow, type(dtnow))
@@ -23,10 +26,9 @@ def add_pushups():
     present_time = dtnow.strftime('%H:%M:%S')
     print(present_time, type(present_time))
 
-    quantity = 15
+    #quantity = 15
+    #minced_oath = 'HUINya'
 
-    minced_oath = 'HUINya'
-    print(minced_oath, type(minced_oath))
 
     exercise_pushups = (present_day, present_time, quantity)
 
@@ -38,8 +40,14 @@ def add_pushups():
 def week_progress():
     #TODO: check the existence of the database
     #TODO: check the existence of the current table
-    cursor.execute("SELECT * FROM pushups")
+    con, cursor = set_connection_database()
+    cursor.execute("SELECT * FROM pushups WHERE time < '09:00:00' ORDER BY time DESC LIMIT 1")
     print(cursor.fetchall())
 
-add_pushups()
+def top3():
+    pass
+
+def monkey_func(banana):
+    return (banana - 4)
+
 week_progress()
