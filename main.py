@@ -1,15 +1,43 @@
 
-import telebot
-from telebot import types
 
-import config
-
-bot = telebot.TeleBot(config.BOT_TOKEN)
+import database_control
+import bot
 
 
-@bot.message_handler(commands=['start'])
-def send_welcome(message):
-    bot.send_message(message.chat.id, "Hello")
 
 
-bot.infinity_polling()
+"""commented database operations
+dbName = 'sport_dairy.db'
+
+
+conn = sqlite3.connect(dbName)
+cursor = conn.cursor()
+print("the fatabase has been created")
+create_query = '''CREATE TABLE IF NOT EXISTS pushups(
+id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+date_time INTEGER NOT NULL,
+pushups_count INTEGER,
+notes TEXT);
+'''
+cursor.execute(create_query)
+print("the table has been created")
+
+
+conn.commit()
+conn.close()
+end of comment"""
+
+
+"""except Exception as e:
+    print("database does not exist, err:",e)
+    if conn:
+        conn.close()"""
+def add_pushups():
+    pass
+
+def week_progress():
+    pass
+
+def top3():
+    pass
+
