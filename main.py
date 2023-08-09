@@ -32,12 +32,11 @@ end of comment"""
     print("database does not exist, err:",e)
     if conn:
         conn.close()"""
-def add_pushups():
-    pass
 
-def week_progress():
-    pass
+
+
 
 def top3():
     pass
 
+add_pushups()

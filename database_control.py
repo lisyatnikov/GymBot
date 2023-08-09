@@ -4,15 +4,16 @@ from datetime import date, datetime
 
 con = sqlite3.connect("sport_dairy.db")
 cursor = con.cursor()
-cursor.execute("""CREATE TABLE IF NOT EXISTS pushups
-                (id INTEGER PRIMARY KEY AUTOINCREMENT,
-                date TEXT,
-                time TEXT,
-                count INTEGER)
-                """)
 
 
 def add_pushups():
+    cursor.execute("""CREATE TABLE IF NOT EXISTS pushups
+                    (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    date TEXT,
+                    time TEXT,
+                    count INTEGER)
+                    """)
+
     dtnow = datetime.now()
     print(dtnow, type(dtnow))
 
@@ -32,4 +33,13 @@ def add_pushups():
     cursor.execute("INSERT INTO pushups (date,time,count) Values (?,?,?)", exercise_pushups)
     con.commit()
 
+
+
+def week_progress():
+    #TODO: check the existence of the database
+    #TODO: check the existence of the current table
+    cursor.execute("SELECT * FROM pushups")
+    print(cursor.fetchall())
+
 add_pushups()
+week_progress()
