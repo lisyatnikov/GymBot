@@ -37,17 +37,20 @@ def add_pushups(quantity):
 
 
 
-def week_progress():
+def show_week_progress():
     #TODO: check the existence of the database
     #TODO: check the existence of the current table
     con, cursor = set_connection_database()
-    cursor.execute("SELECT * FROM pushups WHERE time < '09:00:00' ORDER BY time DESC LIMIT 1")
+    cursor.execute("SELECT * FROM pushups WHERE date > '2023-08-01' ORDER BY date DESC")
     print(cursor.fetchall())
 
-def top3():
-    pass
+def show_top5():
+    con, cursor = set_connection_database()
+    cursor.execute("SELECT * FROM pushups ORDER BY count DESC LIMIT 5")
+    print(cursor.fetchall())
 
 def monkey_func(banana):
     return (banana - 4)
 
-week_progress()
+
+show_week_progress()

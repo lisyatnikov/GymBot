@@ -50,10 +50,19 @@ def click_handling(message):
         bot.send_message(message.chat.id,
                          text="how many pushups have you done today? Add number and press send or ENTER",
                          reply_markup=markup)
+
     elif message.text == "Show week progress":
-        func(exception_code)
-    elif message.text == "Top-5":
+        #func(exception_code=None)
         pass
+
+    elif message.text == "Top-5":
+        #TODO: make func backwords()
+        markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+        btn_back = types.KeyboardButton("Main menu")
+        markup.add(btn_back)
+        bot.send_message(message.chat.id,
+                         text="how many pushups have you done today? Add number and press send or ENTER",
+                         reply_markup=markup)
     elif message.text == "Main menu":
        main_menu(message)
     else:
@@ -66,5 +75,8 @@ def read_pushups(message):
     add_pushups(result)
 
     #bot.send_message(message.chat.id, result)
+
+
+
 
 bot.polling()
