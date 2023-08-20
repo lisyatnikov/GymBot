@@ -3,7 +3,7 @@ import config
 import telebot
 
 
-from database_control import add_pushups, set_connection_database
+from database_control import add_pushups, show_week_progress, show_top5, set_connection_database
 from database_control import monkey_func
 from telebot import types
 
@@ -52,8 +52,9 @@ def click_handling(message):
                          reply_markup=markup)
 
     elif message.text == "Show week progress":
-        #func(exception_code=None)
         pass
+        #bot.send_message(message.chat.id, text=show_top5())
+
 
     elif message.text == "Top-5":
         #TODO: make func backwords()

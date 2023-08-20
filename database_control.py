@@ -2,7 +2,6 @@ import sqlite3
 from datetime import date, datetime
 
 
-
 def set_connection_database():
     con = sqlite3.connect("sport_dairy.db")
     cursor = con.cursor()
@@ -41,16 +40,14 @@ def show_week_progress():
     #TODO: check the existence of the database
     #TODO: check the existence of the current table
     con, cursor = set_connection_database()
-    cursor.execute("SELECT * FROM pushups WHERE date > '2023-08-01' ORDER BY date DESC")
+    cursor.execute("SELECT * FROM pushups WHERE date > date('now', '-6 days');")
     print(cursor.fetchall())
 
 def show_top5():
     con, cursor = set_connection_database()
     cursor.execute("SELECT * FROM pushups ORDER BY count DESC LIMIT 5")
     print(cursor.fetchall())
+    #return(cursor.fetchall())
 
 def monkey_func(banana):
     return (banana - 4)
-
-
-show_week_progress()
