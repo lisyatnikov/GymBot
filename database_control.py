@@ -25,15 +25,10 @@ def add_pushups(quantity):
     present_time = dtnow.strftime('%H:%M:%S')
     print(present_time, type(present_time))
 
-    #quantity = 15
-    #minced_oath = 'HUINya'
-
-
     exercise_pushups = (present_day, present_time, quantity)
 
     cursor.execute("INSERT INTO pushups (date,time,count) Values (?,?,?)", exercise_pushups)
     con.commit()
-
 
 
 def show_week_progress():
@@ -43,11 +38,14 @@ def show_week_progress():
     cursor.execute("SELECT * FROM pushups WHERE date > date('now', '-6 days');")
     print(cursor.fetchall())
 
+
 def show_top5():
     con, cursor = set_connection_database()
     cursor.execute("SELECT * FROM pushups ORDER BY count DESC LIMIT 5")
     print(cursor.fetchall())
     #return(cursor.fetchall())
 
+
 def monkey_func(banana):
     return (banana - 4)
+

@@ -25,19 +25,10 @@ def main_menu(message):
                      reply_markup=markup)
 
 
-
-
-@bot.message_handler(commands=['start','help'])
+@bot.message_handler(commands=['start', 'help'])
 def start(message):
     main_menu(message)
 
-
-# @bot.message_handler(content_types=['text'])
-# def read_pushups(message):
-#     result = message.text
-#     result = int(result)
-#     add_pushups(result)
-#
 
 @bot.message_handler(func=lambda message: (message.text in
                                            ["Add a number of push-ups", "Show week progress", "Top-5", "Main menu"]))
@@ -52,9 +43,12 @@ def click_handling(message):
                          reply_markup=markup)
 
     elif message.text == "Show week progress":
-        pass
-        #bot.send_message(message.chat.id, text=show_top5())
-
+        markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+        btn_back = types.KeyboardButton("Main menu")
+        markup.add(btn_back)
+        bot.send_message(message.chat.id,
+                         text="how many pushups have you done today? Add number and press send or ENTER",
+                         reply_markup=markup)
 
     elif message.text == "Top-5":
         #TODO: make func backwords()
@@ -67,17 +61,16 @@ def click_handling(message):
     elif message.text == "Main menu":
        main_menu(message)
     else:
+        #FIXME: why this branch does not work???
         bot.send_message(message.chat.id, text="ERROR 418: I am not a coffee maker!")
+
 
 @bot.message_handler(content_types=['text']) #TODO: input values has be a number!!!
 def read_pushups(message):
     result = message.text
     result = int(result)
     add_pushups(result)
-
     #bot.send_message(message.chat.id, result)
-
-
 
 
 bot.polling()
